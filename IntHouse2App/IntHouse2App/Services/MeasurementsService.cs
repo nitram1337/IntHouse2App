@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using TinyIoC;
+using IntHouse2App.Constants;
 
 namespace IntHouse2App.Services
 {
@@ -16,9 +17,13 @@ namespace IntHouse2App.Services
             _genericRepository = TinyIoCContainer.Current.Resolve<IGenericRepository>();
         }
 
-        public Task<Measurement> GetLatestMeasurement()
+        public async Task<Measurement> GetLatestMeasurement()
         {
-            throw new NotImplementedException();
+            UriBuilder builder = new UriBuilder(ApiConstants.BaseApiUrl)
+            {
+                Path = $"{ApiConstants.ItemsEndpoint}"
+            };
+            return await _genericRepository.GetAsync<Measurement>(builder.ToString());
         }
 
         public Task<IEnumerable<Measurement>> GetMeasurementsTimeFiltered(TimeFrame timeFrame)

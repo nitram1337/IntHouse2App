@@ -51,6 +51,37 @@ namespace IntHouse2App.Repository
                 throw;
             }
         }
+
+        public async Task<R> GetAsync<T, R>(string uri, T data, string authToken = "")
+        {
+            try
+            {
+                ConfigureHttpClient(authToken);
+
+                string jsonResult = string.Empty;
+
+                HttpResponseMessage responseMessage = await httpClient.GetAsync(uri);
+
+                if (responseMessage.IsSuccessStatusCode)
+                {
+                    jsonResult = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var json = JsonConvert.DeserializeObject<R>(jsonResult);
+                    return json;
+                }
+
+                if (responseMessage.StatusCode == HttpStatusCode.Forbidden ||
+                    responseMessage.StatusCode == HttpStatusCode.Unauthorized)
+                {
+                    throw new ServiceAuthenticationException(jsonResult);
+                }
+
+                throw new HttpRequestExceptionEx(responseMessage.StatusCode, jsonResult);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         #endregion
 
 
