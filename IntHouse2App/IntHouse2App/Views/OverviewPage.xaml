@@ -11,9 +11,15 @@
 
         <RefreshView x:DataType="local:OverviewViewModel" Command="{Binding LoadMeasurementCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <ScrollView>
-                <StackLayout>
-                    <Label Text="{Binding Temperature}"></Label>
-                    <Label Text="{Binding Humidity}"></Label>
+                <StackLayout Padding="10">
+                    <Label FontSize="Large" Text="Temperature: "></Label>
+                    <Label FontSize="Medium" Text="{Binding Temperature}"></Label>
+
+                    <Label FontSize="Large" Text="Humidity: "></Label>
+                    <Label FontSize="Medium" Text="{Binding Humidity}"></Label>
+
+                    <Label FontSize="Large" Text="Created: "></Label>
+                    <Label FontSize="Medium" Text="{Binding TimeCreated}"></Label>
                 </StackLayout>
           </ScrollView>
         </RefreshView>

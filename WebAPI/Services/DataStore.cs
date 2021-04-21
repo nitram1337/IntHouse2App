@@ -14,6 +14,9 @@ namespace WebAPI.Services
         {
             measurements = new List<Measurement>()
             {
+                new Measurement { Temperature = 8.0f, Humidity = 45.0f, TimeCreated = new DateTime(2021, 4, 18, 8, 00, 00) },
+                new Measurement { Temperature = 11.0f, Humidity = 50.0f, TimeCreated = new DateTime(2021, 4, 19, 9, 00, 00) },
+                new Measurement { Temperature = 17.0f, Humidity = 73.0f, TimeCreated = new DateTime(2021, 4, 19, 11, 00, 00) },
                 new Measurement { Temperature = 20.0f, Humidity = 80.0f, TimeCreated = new DateTime(2021, 4, 21, 10, 00, 00) },
                 new Measurement { Temperature = 21.0f, Humidity = 85.0f, TimeCreated = new DateTime(2021, 4, 21, 10, 05, 00) },
                 new Measurement { Temperature = 23.0f, Humidity = 90.0f, TimeCreated = new DateTime(2021, 4, 21, 10, 10, 00) },

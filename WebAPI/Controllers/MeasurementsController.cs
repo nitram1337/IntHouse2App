@@ -26,15 +26,15 @@ namespace WebAPI.Controllers
             return Ok(await _dataService.GetMeasurementAsync());
         }
 
-        //// GET api/<ItemController>/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public async Task<ActionResult<Item>> Get(string id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(await _dataService.GetItemAsync(id));
-        //}
+        // GET api/<ItemController>/5
+        [HttpGet("{timeFrame}", Name = "Get")]
+        public async Task<ActionResult<IEnumerable<Measurement>>> Get(TimeFrame timeFrame)
+        {
+            //if (timeFrame == null)
+            //{
+            //    return NotFound();
+            //}
+            return Ok(await _dataService.GetMeasurementsAsync(timeFrame));
+        }
     }
 }

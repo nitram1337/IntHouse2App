@@ -15,7 +15,8 @@ namespace IntHouse2App
         {
             InitializeComponent();
 
-            //DependencyService.Register<MockDataStore>();
+            MonkeyCache.SQLite.Barrel.ApplicationId = "MyApp";
+
             var container = TinyIoCContainer.Current;
             container.Register<IMeasurementsService, MeasurementsService>();
             container.Register<IGenericRepository, GenericRepository>();

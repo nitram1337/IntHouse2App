@@ -1,4 +1,5 @@
 ﻿using IntHouse2App.Exceptions;
+using IntHouse2App.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
