@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IntHouse2App.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,10 +13,20 @@ namespace IntHouse2App.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OverviewPage : ContentPage
     {
+
+        OverviewViewModel _viewModel;
+
         public OverviewPage()
         {
             InitializeComponent();
-            this.BindingContext = new OverviewPage();
+
+            BindingContext = _viewModel = new OverviewViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _viewModel.OnAppearing();
         }
     }
 }

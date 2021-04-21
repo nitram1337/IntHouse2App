@@ -8,7 +8,7 @@ namespace IntHouse2App.Services
 {
     public interface IMeasurementsService
     {
-        Task<Measurement> GetLatestMeasurement();
-        Task<IEnumerable<Measurement>> GetMeasurementsTimeFiltered(TimeFrame timeFrame);
+        Task<Measurement> GetLatestMeasurementAsync();
+        Task<IEnumerable<Measurement>> GetMeasurementsTimeFilteredAsync(TimeFrame timeFrame);
     }
 }

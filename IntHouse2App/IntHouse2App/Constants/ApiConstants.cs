@@ -6,7 +6,7 @@ namespace IntHouse2App.Constants
 {
     public class ApiConstants
     {
-        public const string BaseApiUrl = "https://192.168.68.115:45455/";
-        public const string ItemsEndpoint = "api/items";
+        public const string BaseApiUrl = "https://192.168.68.115:45456/";
+        public const string ItemsEndpoint = "api/measurements";
     }
 }

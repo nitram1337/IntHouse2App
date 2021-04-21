@@ -1,12 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IntHouse2App.Views.OverviewPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+             x:Class="IntHouse2App.Views.OverviewPage"
+             xmlns:local="clr-namespace:IntHouse2App.ViewModels"  
+             xmlns:model="clr-namespace:IntHouse2App.Models" 
+             xmlns:controls="clr-namespace:IntHouse2App.Controls">
+
+    <StackLayout>
+        <controls:OfflineIndicator x:DataType="local:BaseViewModel" IsVisible="{Binding IsConnected}" />
+
+        <RefreshView x:DataType="local:OverviewViewModel" Command="{Binding LoadMeasurementCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <ScrollView>
+                <StackLayout>
+                    <Label Text="{Binding Temperature}"></Label>
+                    <Label Text="{Binding Humidity}"></Label>
+                </StackLayout>
+          </ScrollView>
+        </RefreshView>
+    </StackLayout>
 </ContentPage>

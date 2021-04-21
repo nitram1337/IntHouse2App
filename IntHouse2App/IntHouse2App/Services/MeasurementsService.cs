@@ -17,7 +17,7 @@ namespace IntHouse2App.Services
             _genericRepository = TinyIoCContainer.Current.Resolve<IGenericRepository>();
         }
 
-        public async Task<Measurement> GetLatestMeasurement()
+        public async Task<Measurement> GetLatestMeasurementAsync()
         {
             UriBuilder builder = new UriBuilder(ApiConstants.BaseApiUrl)
             {
@@ -26,7 +26,7 @@ namespace IntHouse2App.Services
             return await _genericRepository.GetAsync<Measurement>(builder.ToString());
         }
 
-        public Task<IEnumerable<Measurement>> GetMeasurementsTimeFiltered(TimeFrame timeFrame)
+        public Task<IEnumerable<Measurement>> GetMeasurementsTimeFilteredAsync(TimeFrame timeFrame)
         {
             throw new NotImplementedException();
         }
