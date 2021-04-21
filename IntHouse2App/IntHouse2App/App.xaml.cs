@@ -1,6 +1,8 @@
-﻿using IntHouse2App.Services;
+﻿using IntHouse2App.Repository;
+using IntHouse2App.Services;
 using IntHouse2App.Views;
 using System;
+using TinyIoC;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +15,11 @@ namespace IntHouse2App
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            //DependencyService.Register<MockDataStore>();
+            var container = TinyIoCContainer.Current;
+            container.Register<IMeasurementsService, MeasurementsService>();
+            container.Register<IGenericRepository, GenericRepository>();
+
             MainPage = new AppShell();
         }
 
