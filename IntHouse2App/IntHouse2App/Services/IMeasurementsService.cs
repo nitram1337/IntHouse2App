@@ -1,10 +1,14 @@
-﻿using System;
+﻿using IntHouse2App.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace IntHouse2App.Services
 {
     public interface IMeasurementsService
     {
+        Task<Measurement> GetLatestMeasurement();
+        Task<IEnumerable<Measurement>> GetMeasurementsTimeFiltered(TimeFrame timeFrame);
     }
 }
