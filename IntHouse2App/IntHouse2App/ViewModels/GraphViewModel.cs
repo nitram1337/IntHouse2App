@@ -35,7 +35,8 @@ namespace IntHouse2App.ViewModels
         }
         #endregion ChartHumidity
 
-        public List<TimeFrame> TimeFrames { get; } = new List<TimeFrame> { TimeFrame.LatestHour, TimeFrame.LatestDay, TimeFrame.LatestWeek };
+        // To populate Picker
+        public List<TimeFrame> TimeFrames { get; }
 
         TimeFrame _pickedTimeFrame;
 
@@ -44,10 +45,10 @@ namespace IntHouse2App.ViewModels
             get => _pickedTimeFrame;
             set
             {
-                SetProperty(ref _pickedTimeFrame, value);
+                if(SetProperty(ref _pickedTimeFrame, value)) {
                 
                     ExecuteLoadAllChartMeasurementsCommand();
-                
+                 }
             }
         }
 
@@ -57,6 +58,7 @@ namespace IntHouse2App.ViewModels
         {
             Title = "Graph Measurements";
 
+            TimeFrames = new List<TimeFrame> { TimeFrame.LatestHour, TimeFrame.LatestDay, TimeFrame.LatestWeek };
             _pickedTimeFrame = TimeFrame.LatestHour;
             LoadChartMeasurementsCommand = new Command(() => ExecuteLoadAllChartMeasurementsCommand());
 

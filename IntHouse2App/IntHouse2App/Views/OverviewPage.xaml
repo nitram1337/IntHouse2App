@@ -4,7 +4,8 @@
              x:Class="IntHouse2App.Views.OverviewPage"
              xmlns:local="clr-namespace:IntHouse2App.ViewModels"  
              xmlns:model="clr-namespace:IntHouse2App.Models" 
-             xmlns:controls="clr-namespace:IntHouse2App.Controls">
+             xmlns:controls="clr-namespace:IntHouse2App.Controls"
+             Title="{Binding Title}">
 
     <StackLayout>
         <controls:OfflineIndicator x:DataType="local:BaseViewModel" IsVisible="{Binding IsConnected}" />

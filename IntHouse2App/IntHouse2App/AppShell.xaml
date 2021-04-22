@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:IntHouse2App.Views"
+       xmlns:controls="clr-namespace:IntHouse2App.Controls"
        Title="IntHouse2App"
        x:Class="IntHouse2App.AppShell">
 
@@ -10,6 +11,13 @@
     
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
+
+    
+    <!--Flyout header-->
+    <Shell.FlyoutHeader>
+        <controls:FlyoutHeader />
+    </Shell.FlyoutHeader>
+
 
     <Shell.Resources>
         <ResourceDictionary>
@@ -84,7 +92,7 @@
     <FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>-->
-    <FlyoutItem Title="Overview" Icon="icon_about.png">
+    <FlyoutItem Title="Overview" Icon="icon_feed.png">
         <ShellContent Route="OverviewPage" ContentTemplate="{DataTemplate local:OverviewPage}" />
     </FlyoutItem>
     <FlyoutItem Title="Graphs" Icon="icon_about.png">
