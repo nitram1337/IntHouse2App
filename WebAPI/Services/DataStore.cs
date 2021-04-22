@@ -24,6 +24,8 @@ namespace WebAPI.Services
                 new Measurement { Temperature = 28.0f, Humidity = 60.0f, TimeCreated = new DateTime(2021, 4, 22, 05, 15, 00) },
                 new Measurement { Temperature = 29.0f, Humidity = 70.0f, TimeCreated = new DateTime(2021, 4, 22, 06, 15, 00) },
                 new Measurement { Temperature = 31.0f, Humidity = 80.0f, TimeCreated = new DateTime(2021, 4, 22, 07, 15, 00) },
+                new Measurement { Temperature = 13.0f, Humidity = 60.0f, TimeCreated = new DateTime(2021, 4, 22, 13, 00, 00) },
+                new Measurement { Temperature = 17.0f, Humidity = 46.0f, TimeCreated = new DateTime(2021, 4, 22, 12, 15, 00) }
             };
         }
 
@@ -37,11 +39,11 @@ namespace WebAPI.Services
             switch (timeFrame)
             {
                 case TimeFrame.LatestHour:
-                    return await Task.FromResult(measurements.Where(m => m.TimeCreated >= DateTime.Now.AddHours(-1) && m.TimeCreated <= DateTime.Now));
+                    return await Task.FromResult(measurements.Where(m => m.TimeCreated >= DateTime.Now.AddHours(-1) && m.TimeCreated <= DateTime.Now).OrderBy(m => m.TimeCreated));
                 case TimeFrame.LatestDay:
-                    return await Task.FromResult(measurements.Where(m => m.TimeCreated >= DateTime.Now.AddDays(-1) && m.TimeCreated <= DateTime.Now));
+                    return await Task.FromResult(measurements.Where(m => m.TimeCreated >= DateTime.Now.AddDays(-1) && m.TimeCreated <= DateTime.Now).OrderBy(m => m.TimeCreated));
                 case TimeFrame.LatestWeek:
-                    return await Task.FromResult(measurements.Where(m => m.TimeCreated >= DateTime.Now.AddDays(-7) && m.TimeCreated <= DateTime.Now));
+                    return await Task.FromResult(measurements.Where(m => m.TimeCreated >= DateTime.Now.AddDays(-7) && m.TimeCreated <= DateTime.Now).OrderBy(m => m.TimeCreated));
                 default:
                     return await Task.FromResult(measurements);
             }

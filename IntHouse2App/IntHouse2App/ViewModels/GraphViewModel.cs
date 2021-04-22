@@ -15,14 +15,40 @@ namespace IntHouse2App.ViewModels
 {
     public class GraphViewModel : BaseViewModel
     {
-        //public ObservableCollection<Measurement> Measurements;
-        public List<Entry> Entries;
-        private Chart _chartMeasurements;
+        #region ChartTemperature
+        private Chart _chartTemperature;
 
-        public Chart ChartMeasurements
+        public Chart ChartTemperature
         {
-            get => _chartMeasurements;
-            set => SetProperty(ref _chartMeasurements, value);
+            get => _chartTemperature;
+            set => SetProperty(ref _chartTemperature, value);
+        }
+        #endregion ChartTemperature
+
+        #region ChartHumidity
+        private Chart _chartHumidity;
+
+        public Chart ChartHumidity
+        {
+            get => _chartHumidity;
+            set => SetProperty(ref _chartHumidity, value);
+        }
+        #endregion ChartHumidity
+
+        public List<TimeFrame> TimeFrames { get; } = new List<TimeFrame> { TimeFrame.LatestHour, TimeFrame.LatestDay, TimeFrame.LatestWeek };
+
+        TimeFrame _pickedTimeFrame;
+
+        public TimeFrame PickedTimeFrame
+        {
+            get => _pickedTimeFrame;
+            set
+            {
+                SetProperty(ref _pickedTimeFrame, value);
+                
+                    ExecuteLoadAllChartMeasurementsCommand();
+                
+            }
         }
 
         public Command LoadChartMeasurementsCommand { get; }
@@ -30,35 +56,47 @@ namespace IntHouse2App.ViewModels
         public GraphViewModel()
         {
             Title = "Graph Measurements";
-            //Measurements = new ObservableCollection<Measurement>();
-            Entries = new List<Entry>();
-            LoadChartMeasurementsCommand = new Command(async () => await ExecuteLoadAllChartMeasurementsCommand());
+
+            _pickedTimeFrame = TimeFrame.LatestHour;
+            LoadChartMeasurementsCommand = new Command(() => ExecuteLoadAllChartMeasurementsCommand());
 
             IsConnected = Connectivity.NetworkAccess != NetworkAccess.Internet;
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
-        async Task ExecuteLoadAllChartMeasurementsCommand()
+        async void ExecuteLoadAllChartMeasurementsCommand()
         {
             IsBusy = true;
             try
             {
-                //Measurements.Clear();
-                Entries.Clear();
-                var measurements = await _measurementsService.GetMeasurementsTimeFilteredAsync(TimeFrame.LatestWeek);
+                List<Entry> NewTemperatureEntries = new List<Entry>();
+                List<Entry> NewHumidityEntries = new List<Entry>();
+                var measurements = await _measurementsService.GetMeasurementsTimeFilteredAsync(PickedTimeFrame);
                 foreach (Measurement measurement in measurements)
                 {
-                    //Measurements.Add(measurement);
-                    Entries.Add(new Entry(measurement.Temperature)
+                    #region TemperatureEntriesAdd
+                    NewTemperatureEntries.Add(new Entry(measurement.Temperature)
                     {
                         Color = SKColor.Parse("#8a3644"), // #038cfc
-                        Label = measurement.TimeCreated.ToString(),
+                        Label = measurement.TimeCreated.ToString("dd/MM H:mm"),
                         TextColor = SKColor.Parse("#000000"),
                         ValueLabel = measurement.Temperature.ToString()
                     });
+                    #endregion TemperatureEntriesAdd
+
+                    #region HumidityEntriesAdd
+                    NewHumidityEntries.Add(new Entry(measurement.Humidity)
+                    {
+                        Color = SKColor.Parse("#368a53"),
+                        Label = measurement.TimeCreated.ToString("dd/MM H:mm"),
+                        TextColor = SKColor.Parse("#000000"),
+                        ValueLabel = measurement.Humidity.ToString()
+                    });
+                    #endregion HumidityEntriesAdd
                 }
 
-                ChartMeasurements = new LineChart { Entries = Entries, LabelTextSize = 25, ValueLabelOrientation = Orientation.Horizontal};
+                ChartTemperature = new LineChart { Entries = NewTemperatureEntries, LabelTextSize = 28, ValueLabelOrientation = Orientation.Horizontal};
+                ChartHumidity = new PointChart { Entries = NewHumidityEntries, LabelTextSize = 28, ValueLabelOrientation = Orientation.Horizontal};
             }
             catch (Exception ex)
             {

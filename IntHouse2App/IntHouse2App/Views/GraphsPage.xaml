@@ -3,16 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:local="clr-namespace:IntHouse2App.ViewModels"
+             xmlns:controls="clr-namespace:IntHouse2App.Controls"
+             xmlns:models="clr-namespace:IntHouse2App.Models"
+             xmlns:converters="clr-namespace:IntHouse2App.Converters" 
              x:Class="IntHouse2App.Views.GraphsPage">
 
-    <!--<microcharts:ChartView Chart="{Binding TestChart}" x:Name="Chart1" HeightRequest="150" />-->
-
-    <RefreshView x:DataType="local:GraphViewModel" Command="{Binding LoadChartMeasurementsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <ScrollView>
-            <StackLayout>
-                <microcharts:ChartView Chart="{Binding ChartMeasurements}" HeightRequest="300" />
-            </StackLayout>
-        </ScrollView>
-    </RefreshView>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IntEnumConverter x:Key="IntEnum" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
+    <ContentPage.Content>
+        <RefreshView x:DataType="local:GraphViewModel" Command="{Binding LoadChartMeasurementsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <ScrollView>
+                <StackLayout Spacing="30" Padding="8">
+                    <Picker Title="Pick a timeframe" ItemsSource="{Binding TimeFrames}" SelectedIndex="{Binding PickedTimeFrame, Converter={StaticResource IntEnum}}" />
+                
+                    <controls:OfflineIndicator x:DataType="local:BaseViewModel" IsVisible="{Binding IsConnected}" />
+
+                    <Label FontSize="Medium" Text="Temperature" />
+                    <microcharts:ChartView Chart="{Binding ChartTemperature}" HeightRequest="200" />
+
+                    <Label FontSize="Medium" Text="Humidity" />
+                    <microcharts:ChartView Chart="{Binding ChartHumidity}" HeightRequest="200" />
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </ContentPage.Content>
 </ContentPage>
