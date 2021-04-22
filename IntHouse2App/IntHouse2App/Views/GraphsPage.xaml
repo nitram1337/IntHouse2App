@@ -5,7 +5,8 @@
              xmlns:local="clr-namespace:IntHouse2App.ViewModels"
              xmlns:controls="clr-namespace:IntHouse2App.Controls"
              xmlns:models="clr-namespace:IntHouse2App.Models"
-             xmlns:converters="clr-namespace:IntHouse2App.Converters" 
+             xmlns:converters="clr-namespace:IntHouse2App.Converters"
+             xmlns:behavior="clr-namespace:IntHouse2App.Behaviors"
              x:Class="IntHouse2App.Views.GraphsPage">
 
     <ContentPage.Resources>
@@ -18,7 +19,11 @@
         <RefreshView x:DataType="local:GraphViewModel" Command="{Binding LoadChartMeasurementsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <ScrollView>
                 <StackLayout Spacing="30" Padding="8">
-                    <Picker Title="Pick a timeframe" ItemsSource="{Binding TimeFrames}" SelectedIndex="{Binding PickedTimeFrame, Converter={StaticResource IntEnum}}" />
+                    <Picker Title="Pick a timeframe" ItemsSource="{Binding TimeFrames}" SelectedIndex="{Binding PickedTimeFrame, Converter={StaticResource IntEnum}}">
+                        <Picker.Behaviors>
+                            <behavior:TimeFrameBehavior />
+                        </Picker.Behaviors>
+                    </Picker>
                 
                     <controls:OfflineIndicator x:DataType="local:BaseViewModel" IsVisible="{Binding IsConnected}" />
 
