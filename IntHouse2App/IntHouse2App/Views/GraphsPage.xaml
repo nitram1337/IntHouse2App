@@ -2,7 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:local="clr-namespace:IntHouse2App.ViewModels"
              x:Class="IntHouse2App.Views.GraphsPage">
 
-    <microcharts:ChartView Chart="{Binding TestChart}" x:Name="Chart1" HeightRequest="150" />
+    <!--<microcharts:ChartView Chart="{Binding TestChart}" x:Name="Chart1" HeightRequest="150" />-->
+
+    <RefreshView x:DataType="local:GraphViewModel" Command="{Binding LoadChartMeasurementsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <ScrollView>
+        <microcharts:ChartView Chart="{Binding ChartMeasurements}" HeightRequest="150" /></ScrollView>
+    </RefreshView>
+    
 </ContentPage>
