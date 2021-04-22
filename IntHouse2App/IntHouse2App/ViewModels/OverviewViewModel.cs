@@ -49,12 +49,6 @@ namespace IntHouse2App.ViewModels
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
 
-
-        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
-        {
-            IsConnected = e.NetworkAccess != NetworkAccess.Internet;
-        }
-
         async Task ExecuteLoadMeasurementCommand()
         {
             IsBusy = true;
@@ -81,6 +75,10 @@ namespace IntHouse2App.ViewModels
             IsBusy = true;
         }
 
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            IsConnected = e.NetworkAccess != NetworkAccess.Internet;
+        }
 
         public void Dispose()
         {

@@ -35,12 +35,13 @@ namespace IntHouse2App.ViewModels
         }
         #endregion ChartHumidity
 
-        // To populate Picker
-        public List<TimeFrame> TimeFrames { get; }
+        #region Picker Properties
+        public List<TimeFrame> TimeFrames { get; }  // To populate Picker
+
 
         TimeFrame _pickedTimeFrame;
 
-        public TimeFrame PickedTimeFrame
+        public TimeFrame PickedTimeFrame            // To get picked timeframe
         {
             get => _pickedTimeFrame;
             set
@@ -51,6 +52,7 @@ namespace IntHouse2App.ViewModels
                  }
             }
         }
+        #endregion Picker Properties
 
         public Command LoadChartMeasurementsCommand { get; }
 
@@ -58,8 +60,9 @@ namespace IntHouse2App.ViewModels
         {
             Title = "Graph Measurements";
 
-            TimeFrames = new List<TimeFrame> { TimeFrame.LatestHour, TimeFrame.LatestDay, TimeFrame.LatestWeek };
-            _pickedTimeFrame = TimeFrame.LatestHour;
+            TimeFrames = new List<TimeFrame> { TimeFrame.LatestHour, TimeFrame.LatestDay, TimeFrame.LatestWeek };   // Used for populating picker
+
+            _pickedTimeFrame = TimeFrame.LatestHour;                                                                // Set start TimeFrame
             LoadChartMeasurementsCommand = new Command(() => ExecuteLoadAllChartMeasurementsCommand());
 
             IsConnected = Connectivity.NetworkAccess != NetworkAccess.Internet;
@@ -73,6 +76,7 @@ namespace IntHouse2App.ViewModels
             {
                 List<Entry> NewTemperatureEntries = new List<Entry>();
                 List<Entry> NewHumidityEntries = new List<Entry>();
+
                 var measurements = await _measurementsService.GetMeasurementsTimeFilteredAsync(PickedTimeFrame);
                 foreach (Measurement measurement in measurements)
                 {
