@@ -9,7 +9,10 @@
 
     <RefreshView x:DataType="local:GraphViewModel" Command="{Binding LoadChartMeasurementsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <ScrollView>
-        <microcharts:ChartView Chart="{Binding ChartMeasurements}" HeightRequest="150" /></ScrollView>
+            <StackLayout>
+                <microcharts:ChartView Chart="{Binding ChartMeasurements}" HeightRequest="300" />
+            </StackLayout>
+        </ScrollView>
     </RefreshView>
     
 </ContentPage>

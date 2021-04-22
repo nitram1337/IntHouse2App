@@ -51,14 +51,14 @@ namespace IntHouse2App.ViewModels
                     //Measurements.Add(measurement);
                     Entries.Add(new Entry(measurement.Temperature)
                     {
-                        Color = SKColor.Parse("#038cfc"),
+                        Color = SKColor.Parse("#8a3644"), // #038cfc
                         Label = measurement.TimeCreated.ToString(),
                         TextColor = SKColor.Parse("#000000"),
                         ValueLabel = measurement.Temperature.ToString()
                     });
                 }
 
-                ChartMeasurements = new LineChart { Entries = Entries };
+                ChartMeasurements = new LineChart { Entries = Entries, LabelTextSize = 25, ValueLabelOrientation = Orientation.Horizontal};
             }
             catch (Exception ex)
             {
