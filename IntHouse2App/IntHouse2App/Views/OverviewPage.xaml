@@ -13,23 +13,23 @@
         <RefreshView x:DataType="local:OverviewViewModel" Command="{Binding LoadMeasurementCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
             <ScrollView>
                 <StackLayout Spacing="10" Margin="10">
-                    
-                    <Frame Padding="0" BackgroundColor="#545454" BorderColor="black" CornerRadius="10">
+
+                    <Frame Padding="0" BackgroundColor="{StaticResource Secondary}" HasShadow="True" OutlineColor="Gray"  CornerRadius="10">
                         <StackLayout Margin="0" Padding="0">
-                            <Label Text="Temperature: " FontAttributes="Bold" TextColor="White" Padding="15,10,0,5" FontSize="Large"></Label>
+                            <Label Text="Temperature: " FontAttributes="Bold" Padding="15,10,0,5" FontSize="Large"></Label>
 
                             <Frame BackgroundColor="{StaticResource Primary}" HeightRequest="30">
-                                <Label FontSize="Large" TextColor="White"  Text="{Binding Temperature, StringFormat='{0} &#176;C'}"></Label>
+                                <Label FontSize="Large" FontAttributes="Bold" TextColor="White"  Text="{Binding Temperature, StringFormat='{0} &#176;C'}"></Label>
                             </Frame>
                         </StackLayout>
                     </Frame>
 
-                    <Frame Padding="0" BackgroundColor="#545454" BorderColor="black" CornerRadius="10">
+                    <Frame Padding="0" BackgroundColor="{StaticResource Secondary}" HasShadow="True" OutlineColor="Gray" CornerRadius="10">
                         <StackLayout Margin="0" Padding="0">
-                            <Label Text="Humidity: " FontAttributes="Bold" TextColor="White" Padding="15,10,0,5" FontSize="Large"></Label>
+                            <Label Text="Humidity: " FontAttributes="Bold" Padding="15,10,0,5" FontSize="Large"></Label>
 
                             <Frame BackgroundColor="{StaticResource Primary}" HeightRequest="30">
-                                <Label FontSize="Large" TextColor="White"  Text="{Binding Humidity, StringFormat='{0} %'}"></Label>
+                                <Label FontSize="Large" FontAttributes="Bold" TextColor="White"  Text="{Binding Humidity, StringFormat='{0} %'}"></Label>
                             </Frame>
                         </StackLayout>
                     </Frame>

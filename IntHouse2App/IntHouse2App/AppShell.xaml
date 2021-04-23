@@ -92,10 +92,10 @@
     <FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>-->
-    <FlyoutItem Title="Overview" Icon="icon_feed.png">
+    <FlyoutItem Title="Overview" Icon="icon_temp.png">
         <ShellContent Route="OverviewPage" ContentTemplate="{DataTemplate local:OverviewPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Graphs" Icon="icon_about.png">
+    <FlyoutItem Title="Graphs" Icon="icon_graph.png">
         <ShellContent Route="GraphsPage" ContentTemplate="{DataTemplate local:GraphsPage}" />
     </FlyoutItem>
 

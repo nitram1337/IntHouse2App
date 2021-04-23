@@ -5,7 +5,7 @@
     
     <Grid BackgroundColor="Black">
         <Image Aspect="AspectFill"
-               Source="flyoutheaderimg.png"
+               Source="temp_icon2.jpg"
                Opacity="0.6" />
         <Label Text="Temperature and Humidity"
                TextColor="White"
