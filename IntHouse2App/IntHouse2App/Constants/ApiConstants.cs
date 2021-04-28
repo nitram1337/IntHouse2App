@@ -13,6 +13,6 @@ namespace IntHouse2App.Constants
 
         // ThingSpeak
         public const string BaseApiUrl = "https://api.thingspeak.com/";
-        public const string ItemsEndpoint = "channels/1321079/feeds.json";
+        public const string ItemsEndpoint = "channels/1373001/feeds.json";
     }
 }
